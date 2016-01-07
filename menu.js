@@ -88,6 +88,6 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
         return SubMenu;
     })(Menu);
     exports.SubMenu = SubMenu;
-    exports.__esModule = true;
-    exports["default"] = new Menu();
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = new Menu();
 });

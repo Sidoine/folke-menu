@@ -1,0 +1,31 @@
+﻿@menu-height: 50px;
+
+folke-menu {
+    ul{
+        background-color: @menu-background;
+        list-style: none;
+        position:fixed;
+        right:0;
+        left:0;
+        top:0;
+        min-height: @menu-height;
+        margin: 0;
+
+        li{
+            float:left;
+            display:block;
+
+            a{
+                display: block;
+                height: 100%;
+                &:hover{
+                    background-color: @item-over;
+                }
+            }
+        }
+    }
+}
+
+body{
+    margin-top: @menu-height;
+}

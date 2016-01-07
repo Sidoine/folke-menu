@@ -1,12 +1,6 @@
 ﻿import * as ko from "knockout";
 import * as Menu from "./menu";
 
-ko.components.register('folke-menu', {
-    template: `<ul data-bind="foreach: menu">
-<li data-bind="visible: visible, component: { name: component, params: $data }"></li>
-</ul>`,
-    viewModel: { instance: Menu.default }
-});
 
 class MenuButtonComponent {
     public title: string;
@@ -17,11 +11,6 @@ class MenuButtonComponent {
     }
 }
 
-ko.components.register('folke-menu-button', {
-    template: `<button data-bind="text: title, click: action"></button>`,
-    viewModel: MenuRouteButtonComponent
-});
-
 class MenuRouteButtonComponent {
     public title: string;
     public link: string;
@@ -30,11 +19,6 @@ class MenuRouteButtonComponent {
         this.link = '#' + params.route;
     }
 }
-
-ko.components.register('folke-menu-route-button', {
-    template: `<a data-bind="text: title, attr: { href: link }"></span>`,
-    viewModel: MenuRouteButtonComponent
-});
 
 class SubMenuComponent {
     public menu: KnockoutObservableArray<Menu.MenuItem>;
@@ -48,9 +32,28 @@ class SubMenuComponent {
     public toggle = () => this.collapsed(!this.collapsed());
 }
 
-ko.components.register('folke-submenu', {
-    template: `<button data-bind="click:toggle, text: title"></button><!-- ko ifnot: collapsed --><ul data-bind="foreach: menu">
+export function register() {
+    ko.components.register('folke-menu', {
+        template: `<ul data-bind="foreach: menu">
+<li data-bind="visible: visible, component: { name: component, params: $data }"></li>
+</ul>`,
+        viewModel: { instance: Menu.default }
+    });
+
+    ko.components.register('folke-menu-button', {
+        template: `<button data-bind="text: title, click: action"></button>`,
+        viewModel: MenuRouteButtonComponent
+    });
+
+    ko.components.register('folke-menu-route-button', {
+        template: `<a data-bind="text: title, attr: { href: link }"></span>`,
+        viewModel: MenuRouteButtonComponent
+    });
+
+    ko.components.register('folke-submenu', {
+        template: `<button data-bind="click:toggle, text: title"></button><!-- ko ifnot: collapsed --><ul data-bind="foreach: menu">
 <li data-bind="visible: visible, component: { name: component, params: $data }"></li>
 </ul><!-- /ko -->`,
-    viewModel: SubMenuComponent
-});
+        viewModel: SubMenuComponent
+    });
+}
