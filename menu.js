@@ -63,9 +63,10 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.addItem(new MenuButton(title, action, order, visible));
             return this;
         };
-        Menu.prototype.addSubMenu = function (title, order) {
+        Menu.prototype.addSubMenu = function (title, order, visible) {
             if (order === void 0) { order = 0; }
-            return this.addItem(new SubMenu(title, order));
+            if (visible === void 0) { visible = function () { return true; }; }
+            return this.addItem(new SubMenu(title, order, visible));
         };
         return Menu;
     })();

@@ -30,14 +30,14 @@ define(["require", "exports", "knockout", "./menu"], function (require, exports,
         });
         ko.components.register('folke-menu-button', {
             template: "<button data-bind=\"text: title, click: action\"></button>",
-            viewModel: MenuRouteButtonComponent
+            viewModel: MenuButtonComponent
         });
         ko.components.register('folke-menu-route-button', {
             template: "<a data-bind=\"text: title, attr: { href: link }\"></span>",
             viewModel: MenuRouteButtonComponent
         });
         ko.components.register('folke-submenu', {
-            template: "<button data-bind=\"click:toggle, text: title\"></button><!-- ko ifnot: collapsed --><ul data-bind=\"foreach: menu\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }\"></li>\n</ul><!-- /ko -->",
+            template: "<div class=\"submenu\"><button data-bind=\"click:toggle, text: title\"></button><!-- ko ifnot: collapsed --><ul data-bind=\"foreach: menu\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }\"></li>\n</ul><!-- /ko --></div>",
             viewModel: SubMenuComponent
         });
     }

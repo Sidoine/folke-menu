@@ -1,19 +1,28 @@
-﻿@menu-height: 50px;
+﻿@menu-width: 200px;
 
 folke-menu {
-    ul{
+    a {
+        color: @menu-text-color;
+        text-decoration: none;
+        &:hover {
+            color: @menu-text-color-over;
+        }
+    }
+
+    > ul {
+        width: @menu-width;
         background-color: @menu-background;
         list-style: none;
         position:fixed;
         right:0;
         left:0;
         top:0;
-        min-height: @menu-height;
         margin: 0;
+        padding: 5px;
 
-        li{
-            float:left;
+        > li{
             display:block;
+            margin-left: 0;
 
             a{
                 display: block;
@@ -24,8 +33,23 @@ folke-menu {
             }
         }
     }
+
+    .submenu {
+        position: relative;
+        ul {
+            list-style: none;
+            position: absolute;
+            left:@menu-width;
+            top:0;
+            background-color: @menu-sub-background;
+            padding: 10px;
+            li{
+                margin:0;
+            }
+        }
+    }
 }
 
 body{
-    margin-top: @menu-height;
+    margin-left: @menu-width;
 }

@@ -42,7 +42,7 @@ export function register() {
 
     ko.components.register('folke-menu-button', {
         template: `<button data-bind="text: title, click: action"></button>`,
-        viewModel: MenuRouteButtonComponent
+        viewModel: MenuButtonComponent
     });
 
     ko.components.register('folke-menu-route-button', {
@@ -51,9 +51,9 @@ export function register() {
     });
 
     ko.components.register('folke-submenu', {
-        template: `<button data-bind="click:toggle, text: title"></button><!-- ko ifnot: collapsed --><ul data-bind="foreach: menu">
+        template: `<div class="submenu"><button data-bind="click:toggle, text: title"></button><!-- ko ifnot: collapsed --><ul data-bind="foreach: menu">
 <li data-bind="visible: visible, component: { name: component, params: $data }"></li>
-</ul><!-- /ko -->`,
+</ul><!-- /ko --></div>`,
         viewModel: SubMenuComponent
     });
 }

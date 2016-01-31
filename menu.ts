@@ -45,8 +45,8 @@ export class Menu {
         return this;
     }
 
-    public addSubMenu(title: string, order: number = 0) {
-        return this.addItem(new SubMenu(title, order));
+    public addSubMenu(title: string, order: number = 0, visible: () => boolean = () => true) {
+        return this.addItem(new SubMenu(title, order, visible));
     } 
 }
 
