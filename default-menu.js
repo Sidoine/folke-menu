@@ -25,7 +25,7 @@ define(["require", "exports", "knockout", "./menu"], function (require, exports,
     })();
     function register() {
         ko.components.register('folke-menu', {
-            template: "<ul data-bind=\"foreach: menu\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }\"></li>\n</ul>",
+            template: "<header data-bind=\"css: { collapsed: collapsed }\"><span class=\"fa fa-bars\" data-bind=\"click: action\"></span><span class=\"title\" data-bind=\"text: title\"></span></header>\n<ul data-bind=\"foreach: menu, css: { collapsed: collapsed }\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }, css: component\"></li>\n</ul>",
             viewModel: { instance: Menu.default }
         });
         ko.components.register('folke-menu-button', {
@@ -37,7 +37,7 @@ define(["require", "exports", "knockout", "./menu"], function (require, exports,
             viewModel: MenuRouteButtonComponent
         });
         ko.components.register('folke-submenu', {
-            template: "<div class=\"submenu\"><button data-bind=\"click:toggle, text: title\"></button><!-- ko ifnot: collapsed --><ul data-bind=\"foreach: menu\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }\"></li>\n</ul><!-- /ko --></div>",
+            template: "<div class=\"submenu\"><button data-bind=\"click:toggle, text: title\"></button><!-- ko ifnot: collapsed --><ul data-bind=\"foreach: menu\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }, css: component\"></li>\n</ul><!-- /ko --></div>",
             viewModel: SubMenuComponent
         });
     }

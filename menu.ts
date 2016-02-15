@@ -1,25 +1,30 @@
 ﻿import * as ko from "knockout";
 
 export interface MenuItem {
-    title: string;
+    title: KnockoutObservable<string>;
     visible: () => boolean;
     component: string;
     order: number;
 }
 
 export class MenuButton implements MenuItem {
-    constructor(public title: string, public action: () => void, public order = 0, public visible: () => boolean = () => true, public component = 'folke-menu-button', public selected = () => false) {
+    constructor(public title: KnockoutObservable<string>, public action: () => void, public order = 0, public visible: () => boolean = () => true, public component = 'folke-menu-button', public selected = () => false) {
     }
 }
 
 export class MenuRouteButton implements MenuItem {
-    constructor(public title: string, public route: string, public order = 0, public visible: () => boolean = () => true, public component = 'folke-menu-route-button', public selected = () => false) {
+    constructor(public title: KnockoutObservable<string>, public route: string, public order = 0, public visible: () => boolean = () => true, public component = 'folke-menu-route-button', public selected = () => false) {
     }
 }
 
 export class Menu {
+    public collapsed = ko.observable(true);
+    public action = () => this.collapsed(!this.collapsed());
     public menu: KnockoutObservableArray<MenuItem> = ko.observableArray<MenuItem>();
     
+    constructor(public title: KnockoutObservable<string>) {
+    }
+
     public addItem<T extends MenuItem>(menuItem: T) {
         const m = this.menu();
         let i;
@@ -35,28 +40,29 @@ export class Menu {
         return menuItem;
     }
 
-    public addRouteButton(title: string, route: string) {
+    public addRouteButton(title: KnockoutObservable<string>, route: string) {
         this.addItem(new MenuRouteButton(title, route));
         return this;
     }
 
-    public addButton(title: string, action: () => void, order: number = 0, visible?: () => boolean) {
+    public addButton(title: KnockoutObservable<string>, action: () => void, order: number = 0, visible?: () => boolean) {
         this.addItem(new MenuButton(title, action, order, visible));
         return this;
     }
 
-    public addSubMenu(title: string, order: number = 0, visible: () => boolean = () => true) {
+    public addCustomSubMenu(component: string, title: KnockoutObservable<string> = null, order: number = 0, visible: () => boolean = () => true) {
+        return this.addItem(new SubMenu(title, order, visible, component));
+    } 
+
+    public addSubMenu(title: KnockoutObservable<string>, order: number = 0, visible: () => boolean = () => true) {
         return this.addItem(new SubMenu(title, order, visible));
     } 
 }
 
 export class SubMenu extends Menu implements MenuItem {
-    public collapsed = ko.observable(true);
-    public action = () => this.collapsed(!this.collapsed());
-
-    constructor(public title: string, public order = 0, public visible: () => boolean = () => true, public component = 'folke-submenu') {
-        super();
+    constructor(title: KnockoutObservable<string>, public order = 0, public visible: () => boolean = () => true, public component = 'folke-submenu') {
+        super(title);
     }
 }
 
-export default new Menu();
+export default new Menu(ko.observable(''));

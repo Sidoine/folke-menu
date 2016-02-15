@@ -37,7 +37,11 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
     })();
     exports.MenuRouteButton = MenuRouteButton;
     var Menu = (function () {
-        function Menu() {
+        function Menu(title) {
+            var _this = this;
+            this.title = title;
+            this.collapsed = ko.observable(true);
+            this.action = function () { return _this.collapsed(!_this.collapsed()); };
             this.menu = ko.observableArray();
         }
         Menu.prototype.addItem = function (menuItem) {
@@ -63,6 +67,12 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.addItem(new MenuButton(title, action, order, visible));
             return this;
         };
+        Menu.prototype.addCustomSubMenu = function (component, title, order, visible) {
+            if (title === void 0) { title = null; }
+            if (order === void 0) { order = 0; }
+            if (visible === void 0) { visible = function () { return true; }; }
+            return this.addItem(new SubMenu(title, order, visible, component));
+        };
         Menu.prototype.addSubMenu = function (title, order, visible) {
             if (order === void 0) { order = 0; }
             if (visible === void 0) { visible = function () { return true; }; }
@@ -74,21 +84,17 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
     var SubMenu = (function (_super) {
         __extends(SubMenu, _super);
         function SubMenu(title, order, visible, component) {
-            var _this = this;
             if (order === void 0) { order = 0; }
             if (visible === void 0) { visible = function () { return true; }; }
             if (component === void 0) { component = 'folke-submenu'; }
-            _super.call(this);
-            this.title = title;
+            _super.call(this, title);
             this.order = order;
             this.visible = visible;
             this.component = component;
-            this.collapsed = ko.observable(true);
-            this.action = function () { return _this.collapsed(!_this.collapsed()); };
         }
         return SubMenu;
     })(Menu);
     exports.SubMenu = SubMenu;
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = new Menu();
+    exports.default = new Menu(ko.observable(''));
 });
