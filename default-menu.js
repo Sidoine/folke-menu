@@ -1,18 +1,19 @@
 define(["require", "exports", "knockout", "./menu"], function (require, exports, ko, Menu) {
+    "use strict";
     var MenuButtonComponent = (function () {
         function MenuButtonComponent(params) {
             this.title = params.title;
             this.action = params.action;
         }
         return MenuButtonComponent;
-    })();
+    }());
     var MenuRouteButtonComponent = (function () {
         function MenuRouteButtonComponent(params) {
             this.title = params.title;
             this.link = '#' + params.route;
         }
         return MenuRouteButtonComponent;
-    })();
+    }());
     var SubMenuComponent = (function () {
         function SubMenuComponent(params) {
             var _this = this;
@@ -22,7 +23,7 @@ define(["require", "exports", "knockout", "./menu"], function (require, exports,
             this.title = params.title;
         }
         return SubMenuComponent;
-    })();
+    }());
     function register() {
         ko.components.register('folke-menu', {
             template: "<header data-bind=\"css: { collapsed: collapsed }\"><span class=\"fa fa-bars\" data-bind=\"click: action\"></span><span class=\"title\" data-bind=\"text: title\"></span></header>\n<ul data-bind=\"foreach: menu, css: { collapsed: collapsed }\">\n<li data-bind=\"visible: visible, component: { name: component, params: $data }, css: component\"></li>\n</ul>",

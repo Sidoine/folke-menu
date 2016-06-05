@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 define(["require", "exports", "knockout"], function (require, exports, ko) {
+    "use strict";
     var MenuButton = (function () {
         function MenuButton(title, action, order, visible, component, selected) {
             if (order === void 0) { order = 0; }
@@ -18,7 +19,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.selected = selected;
         }
         return MenuButton;
-    })();
+    }());
     exports.MenuButton = MenuButton;
     var MenuRouteButton = (function () {
         function MenuRouteButton(title, route, order, visible, component, selected) {
@@ -34,7 +35,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.selected = selected;
         }
         return MenuRouteButton;
-    })();
+    }());
     exports.MenuRouteButton = MenuRouteButton;
     var Menu = (function () {
         function Menu(title) {
@@ -79,7 +80,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             return this.addItem(new SubMenu(title, order, visible));
         };
         return Menu;
-    })();
+    }());
     exports.Menu = Menu;
     var SubMenu = (function (_super) {
         __extends(SubMenu, _super);
@@ -93,8 +94,8 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.component = component;
         }
         return SubMenu;
-    })(Menu);
+    }(Menu));
     exports.SubMenu = SubMenu;
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = new Menu(ko.observable(''));
+    exports.__esModule = true;
+    exports["default"] = new Menu(ko.observable(''));
 });
