@@ -88,10 +88,11 @@ var SubMenu = (function (_super) {
         if (order === void 0) { order = 0; }
         if (visible === void 0) { visible = function () { return true; }; }
         if (component === void 0) { component = 'folke-submenu'; }
-        _super.call(this, title);
-        this.order = order;
-        this.visible = visible;
-        this.component = component;
+        var _this = _super.call(this, title) || this;
+        _this.order = order;
+        _this.visible = visible;
+        _this.component = component;
+        return _this;
     }
     return SubMenu;
 }(Menu));
