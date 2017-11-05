@@ -1,14 +1,20 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var ko = require("knockout");
-var MenuButton = (function () {
+var MenuButton = /** @class */ (function () {
     function MenuButton(title, action, order, visible, component, selected) {
         if (order === void 0) { order = 0; }
-        if (visible === void 0) { visible = function () { return true; }; }
+        if (visible === void 0) { visible = ko.observable(true); }
         if (component === void 0) { component = 'folke-menu-button'; }
         if (selected === void 0) { selected = function () { return false; }; }
         this.title = title;
@@ -21,10 +27,10 @@ var MenuButton = (function () {
     return MenuButton;
 }());
 exports.MenuButton = MenuButton;
-var MenuRouteButton = (function () {
+var MenuRouteButton = /** @class */ (function () {
     function MenuRouteButton(title, route, order, visible, component, selected) {
         if (order === void 0) { order = 0; }
-        if (visible === void 0) { visible = function () { return true; }; }
+        if (visible === void 0) { visible = ko.observable(true); }
         if (component === void 0) { component = 'folke-menu-route-button'; }
         if (selected === void 0) { selected = function () { return false; }; }
         this.title = title;
@@ -37,7 +43,7 @@ var MenuRouteButton = (function () {
     return MenuRouteButton;
 }());
 exports.MenuRouteButton = MenuRouteButton;
-var Menu = (function () {
+var Menu = /** @class */ (function () {
     function Menu(title) {
         var _this = this;
         this.title = title;
@@ -71,22 +77,22 @@ var Menu = (function () {
     Menu.prototype.addCustomSubMenu = function (component, title, order, visible) {
         if (title === void 0) { title = null; }
         if (order === void 0) { order = 0; }
-        if (visible === void 0) { visible = function () { return true; }; }
+        if (visible === void 0) { visible = ko.observable(true); }
         return this.addItem(new SubMenu(title, order, visible, component));
     };
     Menu.prototype.addSubMenu = function (title, order, visible) {
         if (order === void 0) { order = 0; }
-        if (visible === void 0) { visible = function () { return true; }; }
+        if (visible === void 0) { visible = ko.observable(true); }
         return this.addItem(new SubMenu(title, order, visible));
     };
     return Menu;
 }());
 exports.Menu = Menu;
-var SubMenu = (function (_super) {
+var SubMenu = /** @class */ (function (_super) {
     __extends(SubMenu, _super);
     function SubMenu(title, order, visible, component) {
         if (order === void 0) { order = 0; }
-        if (visible === void 0) { visible = function () { return true; }; }
+        if (visible === void 0) { visible = ko.observable(true); }
         if (component === void 0) { component = 'folke-submenu'; }
         var _this = _super.call(this, title) || this;
         _this.order = order;
@@ -97,5 +103,3 @@ var SubMenu = (function (_super) {
     return SubMenu;
 }(Menu));
 exports.SubMenu = SubMenu;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = new Menu(ko.observable(''));
