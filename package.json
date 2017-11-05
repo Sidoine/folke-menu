@@ -1,6 +1,6 @@
 {
   "name": "folke-menu",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "A simple menu for Folke",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
